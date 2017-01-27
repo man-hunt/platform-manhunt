@@ -1,0 +1,15 @@
+{
+  "name": "platform-manhunt",
+  "version": "1.0.0",
+  "description": "_by PJ Santoro, Mark Zepeda, Christa Heinrich, Lauren Giosa, Jeremy Hummel_",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@gitlab.hrt.io:manhunt/platform-manhunt.git"
+  },
+  "author": "",
+  "license": "ISC"
+}
