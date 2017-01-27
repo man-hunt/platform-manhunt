@@ -1,2 +1,7 @@
-job1:
-  script: "execute-script-for-job1"
+stages:
+  - deploy
+
+job:
+  stage: deploy
+  script:
+    - echo "Hello deploy"
