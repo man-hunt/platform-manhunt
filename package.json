@@ -11,5 +11,8 @@
     "url": "git@gitlab.hrt.io:manhunt/platform-manhunt.git"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "koa": "^1.2.4"
+  }
 }
