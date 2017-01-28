@@ -1,0 +1,4 @@
+game opens - pings server to create new user with display name, and bluetooth id, returns sessionid
+every x seconds poll server with sessionid, location, direction, [bluetooth ids -> rssi]
+	return every user object {sessionid, location, direction, birthtime}
+kill user {sessionid, killerid}
