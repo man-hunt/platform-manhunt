@@ -16,12 +16,13 @@ const options   = {
   origin: '*'
 };
 
+let mongo = "mongodb://localhost/manhunt";
 mongoose.Promise = Promise;
-mongoose.connect(process.env.MONGODB);
+mongoose.connect(mongo);
 const db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error: not connected to %s', process.env.MONGODB));
+db.on('error', console.error.bind(console, 'connection error: not connected to %s', mongo));
 db.once('open', function () {
-  console.log('Connected to %s', process.env.MONGODB);
+  console.log('Connected to %s', mongo);
 });
 
 app.use(cors(options));
