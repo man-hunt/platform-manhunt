@@ -38,4 +38,4 @@ app.use(function * (next) {
 app.use(mount('/v1', APIv1.middleware()));
 
 if (!module.parent) app.listen(3000);
-console.log('Blueprint is Running on http://localhost:3000/');
+console.log('Manhunt is Running on http://localhost:3000/');
