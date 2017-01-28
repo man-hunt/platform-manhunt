@@ -46,6 +46,15 @@ router.put('/users', function* (){
 
 router.delete('/users', function* (){
 	let ctx = this;
+	if(ctx.request.body.victimId === ctx.request.body.killerId){
+		ctx.response.status = 400;
+		ctx.response.body = {
+			victim: ctx.request.body.victimId,
+			killer: ctx.request.body.killerId,
+			error: "Can not kill self!"
+		};
+		return;
+	}
 	let victim = yield User.findById(ctx.request.body.victimId).exec();
 	let killer = yield User.findById(ctx.request.body.killerId).exec();
 	if(!victim || !killer){
@@ -53,7 +62,7 @@ router.delete('/users', function* (){
 		ctx.response.body = {
 			victim: victim,
 			killer: killer,
-			error: "Victim or killer not found"
+			error: "Victim or killer not found!"
 		};
 		return;
 	}
@@ -62,7 +71,16 @@ router.delete('/users', function* (){
 		ctx.response.body = {
 			victim: victim,
 			killer: killer,
-			error: "Victim already dead!"
+			error: "Victim is already dead!"
+		}
+		return;
+	}
+	if(killer.isDead){
+		ctx.response.status = 400;
+		ctx.response.body = {
+			victim: victim,
+			killer: killer,
+			error: "Killer is dead and can't kill victim!"
 		}
 		return;
 	}
