@@ -104,4 +104,11 @@ router.delete('/users', function* (){
 	ctx.response.status = 200;
 });
 
+router.delete('/admin/users', function* (){
+	let ctx = this;
+	let deleted = yield User.remove({}).exec();
+	ctx.response.body = deleted;
+	ctx.response.status = 200;
+});
+
 module.exports = router;
