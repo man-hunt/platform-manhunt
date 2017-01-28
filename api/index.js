@@ -38,6 +38,14 @@ router.put('/users', function* (){
 		};
 		return;
 	}
+	if(user.isDead){
+		ctx.response.status = 400;
+		ctx.response.body = {
+			user: user,
+			error: "User is dead and can't update location!"
+		}
+		return;
+	}
 	user.loc = ctx.request.body.loc;
 	let savedUser = yield user.save();
 	ctx.response.body = savedUser;

@@ -8,7 +8,8 @@ let schema = new Schema({
 	ble: Schema.Types.String,
 	loc: {
 		lat: Schema.Types.Number,
-		long: Schema.Types.Number
+		long: Schema.Types.Number,
+		dir: Schema.Types.Number
 	},
 	isDead: Schema.Types.Boolean,
 	killedBy: Schema.Types.ObjectId,
