@@ -1,7 +1,5 @@
 'use strict';
 
-require('dotenv').config();
-
 const _         = require('lodash');
 const util      = require('util');
 const mongoose  = require('mongoose');
