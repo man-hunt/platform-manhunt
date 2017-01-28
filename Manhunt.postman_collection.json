@@ -51,12 +51,12 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1485621685828,
+			"time": 1485625895429,
 			"name": "Update User",
 			"description": "",
 			"collectionId": "f14ae890-d9e6-16b6-e504-0078370732b1",
 			"responses": [],
-			"rawModeData": "{\n\t\"id\": \"588cc8813418524b3b2b78eb\",\n\t\"loc\": {\n\t\t\"lat\": -34.1231,\n\t\t\"long\": 117.1228\n\t}\n}"
+			"rawModeData": "{\n\t\"id\": \"588cc8813418524b3b2b78eb\",\n\t\"loc\": {\n\t\t\"lat\": -34.1231,\n\t\t\"long\": 117.1228,\n\t\t\"dir\": 275\n\t}\n}"
 		},
 		{
 			"id": "80e2a0e0-159e-44c8-c8b7-35a579a54862",
@@ -71,12 +71,12 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1485623112379,
+			"time": 1485625904404,
 			"name": "PROD Update User",
 			"description": "",
 			"collectionId": "f14ae890-d9e6-16b6-e504-0078370732b1",
 			"responses": [],
-			"rawModeData": "{\n\t\"id\": \"588cc8813418524b3b2b78eb\",\n\t\"loc\": {\n\t\t\"lat\": -34.1231,\n\t\t\"long\": 117.1228\n\t}\n}"
+			"rawModeData": "{\n\t\"id\": \"588cc8813418524b3b2b78eb\",\n\t\"loc\": {\n\t\t\"lat\": -34.1231,\n\t\t\"long\": 117.1228,\n\t\t\"dir\": 275\n\t}\n}"
 		},
 		{
 			"id": "8a5f6d42-3f9e-f2b9-0c67-06d007fa2135",
