@@ -117,23 +117,21 @@ function* addLockOn(player, target){
 	return {target, player};
 }
 
-let attack = function(player, target){
-
-}
-
-let killTarget = function(player, target){
+let killTarget = function* (player, target){
 	target.killedBy = player._id;
 	target.isDead = true;
 	target.killedAt = new Date();
+	target.lockedOnBy = null;
 	console.log("Victim: ", target);
-	return target.save();
-}
+	target = yield target.save();
 
-let awardKill = function(player, victim){
-	player.killed.push(victim._id);
-	player.credits += calcBounty(victim);
+	player.target = null;
+	player.targetLockedOnAt = null;
+	player.killed.push(target._id);
+	player.credits += calcBounty(target);
 	console.log("Killer: ", player);
-	return player.save();
+	player = yield player.save();
+	return {target, player};
 }
 
 let calcBounty = function(player){
@@ -213,9 +211,7 @@ module.exports = {
 	canAttack,
 	processLockOn,
 	processEscape,
-	attack,
 	killTarget,
-	awardKill,
 	calcBounty,
 	newPlayer,
 	getAllPlayers,

@@ -1,6 +1,7 @@
 'use strict';
 
 const Game      = require('./game');
+const Settings  = require('./game_settings');
 
 module.exports.getAllPlayers = function* (){
 	let ctx = this;
@@ -24,6 +25,23 @@ module.exports.getPlayer = function* (){
 	let nearbyPlayers = yield Game.getNearbyPlayers(user);
 	let handledLockon = yield Game.processLockOn(user, nearbyPlayers);
 	let handledEscape = yield Game.processEscape(user, nearbyPlayers);
+
+	//Process kill if possible
+	if(handledLockon && handledLockon.timeLockedOn){
+		if(handledLockon.timeLockedOn >= Settings.LOCKON_TIME){
+			let canAttack = Game.canAttack(handledLockon.player, handledLockon.target);
+			if(!canAttack.error){
+				let result = yield Game.killTarget(handledLockon.player, handledLockon.target.user);
+				ctx.response.body = {
+					user: result.player,
+					nearby: nearbyPlayers,
+					victim: result.victim
+				}
+				ctx.response.status = 200;
+				return;
+			}
+		}
+	}
 	ctx.response.body = {
 		user: user,
 		nearby: nearbyPlayers
