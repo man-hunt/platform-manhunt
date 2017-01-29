@@ -1,11 +1,10 @@
 'use strict';
 
-const Field     = require('./field');
 const Game      = require('./game');
 
 module.exports.getAllPlayers = function* (){
 	let ctx = this;
-	let users = yield Field.getAllPlayers();
+	let users = yield Game.getAllPlayers();
 	ctx.response.body = {
 		users: users
 	}
@@ -14,7 +13,7 @@ module.exports.getAllPlayers = function* (){
 
 module.exports.getPlayer = function* (){
 	let ctx = this;
-	let user = yield Field.getPlayer(ctx.params.userid);
+	let user = yield Game.getPlayer(ctx.params.userid);
 	if(!user){
 		ctx.response.status = 404;
 		ctx.response.body = {
@@ -22,7 +21,9 @@ module.exports.getPlayer = function* (){
 		};
 		return;
 	}
-	let nearbyPlayers = yield Field.getNearbyPlayers(user);
+	let nearbyPlayers = yield Game.getNearbyPlayers(user);
+	let handledLockon = yield Game.processLockOn(user, nearbyPlayers);
+	let handledEscape = yield Game.processEscape(user, nearbyPlayers);
 	ctx.response.body = {
 		user: user,
 		nearby: nearbyPlayers
@@ -32,7 +33,7 @@ module.exports.getPlayer = function* (){
 
 module.exports.createPlayer = function* (){
 	let ctx = this;
-	let newUser = yield Field.newPlayer(ctx.request.body)
+	let newUser = yield Game.newPlayer(ctx.request.body)
 	.catch(error => {
 		this.throw(error.message, 400);
 	});
@@ -42,7 +43,7 @@ module.exports.createPlayer = function* (){
 
 module.exports.updatePlayer = function* (){
 	let ctx = this;
-	let user = yield Field.getPlayer(ctx.request.body.id);
+	let user = yield Game.getPlayer(ctx.request.body.id);
 	if(!user){
 		ctx.response.status = 404;
 		ctx.response.body = {
@@ -58,7 +59,7 @@ module.exports.updatePlayer = function* (){
 		}
 		return;
 	}
-	let savedUser = yield Field.updatePlayersState(user, ctx.request.body.loc);
+	let savedUser = yield Game.updatePlayersState(user, ctx.request.body.loc);
 	ctx.response.body = savedUser;
 	ctx.response.status = 200;
 };
@@ -74,8 +75,8 @@ module.exports.attackPlayer = function* (){
 		};
 		return;
 	}
-	let victim = yield Field.getPlayer(ctx.request.body.victimId);
-	let killer = yield Field.getPlayer(ctx.request.body.killerId);
+	let victim = yield Game.getPlayer(ctx.request.body.victimId);
+	let killer = yield Game.getPlayer(ctx.request.body.killerId);
 	let canAttack = Game.canAttack(killer, victim);
 	if(canAttack.error){
 		ctx.response.status = canAttack.status;

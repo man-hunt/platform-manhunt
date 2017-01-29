@@ -23,7 +23,9 @@ let schema = new Schema({
 	killed: [Schema.Types.ObjectId],
 	credits: {type: Schema.Types.Number, default: 0},
 	killedAt: Schema.Types.Date,
-	target: Schema.Types.ObjectId
+	target: Schema.Types.ObjectId,
+	targetLockedOnAt: Schema.Types.Date,
+	lockedOnBy: Schema.Types.ObjectId
 }, {
   timestamps: true,
 });

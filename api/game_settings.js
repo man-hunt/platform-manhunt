@@ -8,5 +8,5 @@ module.exports = {
 	ATTACK_DISTANCE_CLOSE: 1, //meters
 	ATTACK_ANGLE: 30, //degrees from attackers direction
 	ATTACK_ANGLE_CLOSE: 75,
-	LOCKON_TIME: 5, //seconds
+	LOCKON_TIME: 5000, //millis
 }

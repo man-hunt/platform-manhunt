@@ -2,7 +2,6 @@
 
 const Router    = require('koa-router');
 const Logic     = require('./logic');
-const Field     = require('./field');
 
 const router = new Router();
 
@@ -14,7 +13,7 @@ router.delete('/users', Logic.attackPlayer);
 
 router.delete('/admin/users', function* (){
 	let ctx = this;
-	let deleted = yield Field.deleteAllPlayers();
+	let deleted = yield Game.deleteAllPlayers();
 	ctx.response.body = deleted;
 	ctx.response.status = 200;
 });
