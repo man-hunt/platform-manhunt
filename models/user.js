@@ -17,10 +17,12 @@ let schema = new Schema({
 			default: [0,0]
 		} 
 	},
-	dir: Schema.Types.Number,
-	isDead: Schema.Types.Boolean,
+	dir: {type: Schema.Types.Number, default: 0.0},
+	isDead: {type: Schema.Types.Boolean, default: false},
 	killedBy: Schema.Types.ObjectId,
-	killed: [Schema.Types.ObjectId]
+	killed: [Schema.Types.ObjectId],
+	credits: {type: Schema.Types.Number, default: 0},
+	killedAt: Schema.Types.Date
 }, {
   timestamps: true,
 });
