@@ -5,10 +5,7 @@ const Game      = require('./game');
 
 module.exports.getAllPlayers = function* (){
 	let ctx = this;
-	let users = yield Field.getAllPlayers()
-	.catch(error => {
-		this.throw(error.message, 400);
-	});
+	let users = yield Field.getAllPlayers();
 	ctx.response.body = {
 		users: users
 	}
