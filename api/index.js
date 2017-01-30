@@ -2,6 +2,7 @@
 
 const Router    = require('koa-router');
 const Logic     = require('./logic');
+const Game      = require('./game');
 
 const router = new Router();
 

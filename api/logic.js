@@ -32,6 +32,7 @@ module.exports.getPlayer = function* (){
 			let canAttack = Game.canAttack(handledLockon.player, handledLockon.target);
 			if(!canAttack.error){
 				let result = yield Game.killTarget(handledLockon.player, handledLockon.target.user);
+				yield result.player.populate("killedBy").populate("lockedOnBy").populate("target").populate("killed").execPopulate();
 				ctx.response.body = {
 					user: result.player,
 					nearby: nearbyPlayers,
@@ -42,6 +43,7 @@ module.exports.getPlayer = function* (){
 			}
 		}
 	}
+	yield user.populate("killedBy").populate("lockedOnBy").populate("target").populate("killed").execPopulate();
 	ctx.response.body = {
 		user: user,
 		nearby: nearbyPlayers
